@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    RCS(KC_TAB), KC_PGDN, KC_PGUP, C(KC_TAB), KC_DEL,  XXXXXXX,
         XXXXXXX, OS_SHFT, OS_CTRL, OS_ALT,  OS_GUI,  CW_TOGG,    KC_LEFT,     KC_DOWN, KC_UP,   KC_RGHT,   KC_BSPC, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    KC_HOME,     KC_TAB,  KC_ESC,  KC_END ,   KC_ENT,  XXXXXXX,
-                                   XXXXXXX, _______, _______,    _______, _______, XXXXXXX
+                                   XXXXXXX, KC_LSFT, _______,    _______, _______, XXXXXXX
     ),
 
     /*
