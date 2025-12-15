@@ -2,3 +2,4 @@
 USER_NAME := tomkennedy513
 
 TRI_LAYER_ENABLE = yes
+COMBO_ENABLE = yes
