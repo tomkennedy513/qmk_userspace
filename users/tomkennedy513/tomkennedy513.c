@@ -17,43 +17,6 @@ static uint16_t sym_timer = 0;
 static uint16_t nav_timer = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // Handle custom sticky layer keys
-    switch (keycode) {
-        case OS_SYM:
-            if (record->event.pressed) {
-                layer_on(_SYM);
-                sym_mode = LAYER_HELD;
-            } else {
-                if (sym_mode == LAYER_HELD) {
-                    // Tapped without using - make sticky and start timeout
-                    sym_mode = LAYER_STICKY;
-                    sym_timer = timer_read();  // Only start timer when becoming sticky
-                } else {
-                    // Was held+used or sticky+used - turn off
-                    sym_mode = LAYER_OFF;
-                    layer_off(_SYM);
-                }
-            }
-            return false;
-
-        case OS_NAV:
-            if (record->event.pressed) {
-                layer_on(_NAV);
-                nav_mode = LAYER_HELD;
-            } else {
-                if (nav_mode == LAYER_HELD) {
-                    // Tapped without using - make sticky and start timeout
-                    nav_mode = LAYER_STICKY;
-                    nav_timer = timer_read();  // Only start timer when becoming sticky
-                } else {
-                    // Was held+used or sticky+used - turn off
-                    nav_mode = LAYER_OFF;
-                    layer_off(_NAV);
-                }
-            }
-            return false;
-    }
-
     // For non-layer keys (including OSMs)
     if (keycode != OS_SYM && keycode != OS_NAV) {
         if (record->event.pressed) {
@@ -74,6 +37,44 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_off(_NAV);
             }
         }
+        return true;
+    }
+
+    // Handle custom sticky layer keys
+    switch (keycode) {
+        case OS_SYM:
+            if (record->event.pressed) {
+                layer_on(_SYM);
+                sym_mode = LAYER_HELD;
+            } else {
+                if (sym_mode == LAYER_HELD) {
+                    // Tapped without using - make sticky and start timeout
+                    sym_mode = LAYER_STICKY;
+                    sym_timer = timer_read();  // Only start timer when becoming sticky
+                } else {
+                    // Was held+used or sticky+used - turn off
+                    sym_mode = LAYER_OFF;
+                    layer_off(_SYM);
+                }
+            }
+            return true;  // Changed from false to allow combo processing
+
+        case OS_NAV:
+            if (record->event.pressed) {
+                layer_on(_NAV);
+                nav_mode = LAYER_HELD;
+            } else {
+                if (nav_mode == LAYER_HELD) {
+                    // Tapped without using - make sticky and start timeout
+                    nav_mode = LAYER_STICKY;
+                    nav_timer = timer_read();  // Only start timer when becoming sticky
+                } else {
+                    // Was held+used or sticky+used - turn off
+                    nav_mode = LAYER_OFF;
+                    layer_off(_NAV);
+                }
+            }
+            return true;  // Changed from false to allow combo processing
     }
 
     return true;
