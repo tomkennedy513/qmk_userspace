@@ -1,6 +1,11 @@
 #include QMK_KEYBOARD_H
 #include "tomkennedy513.h"
 
+const uint16_t PROGMEM cmd_combo[]  = {OS_SHFT, OS_SYM, COMBO_END};
+combo_t                key_combos[] = {
+    COMBO(cmd_combo, KC_LGUI),
+};
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
